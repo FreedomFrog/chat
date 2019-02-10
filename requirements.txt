@@ -1,4 +1,5 @@
 django
+django-heroku
 django-bootstrap4
 django-redis
 
