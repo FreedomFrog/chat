@@ -1,1 +1,1 @@
-web: bin/start-pgbouncer-stunnel daphne django_channels.asgi:application --port $PORT --bind 0.0.0.0
+web: bin/start-pgbouncer daphne django_channels.asgi:application --port $PORT --bind 0.0.0.0
