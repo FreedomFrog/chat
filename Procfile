@@ -1,1 +1,1 @@
-web: daphne django_channels.asgi:application -p $PORT
+web: daphne django_channels.asgi:application --port $PORT --bind 0.0.0.0

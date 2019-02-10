@@ -26,7 +26,7 @@ SECRET_KEY = 'lh*r5z#_)w!_k2527%f0+9c@s&klcr@az2)n3jz51ea(4s=i)#'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['protect-gorge-59525.herokuapp.com']
+ALLOWED_HOSTS = ['obscure-shelf-85641.herokuapp.com/']
 
 
 # Application definition
