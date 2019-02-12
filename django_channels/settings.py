@@ -94,8 +94,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'postgres',
         'USER': 'postgres',
-        # 'HOST': os.environ.get('DATABASE_URL'),
-        'HOST': 'db',
+        'HOST': os.environ.get('DATABASE_URL'),
+        # 'HOST': 'db',
         'PORT': 5432,
     }
 }
@@ -139,4 +139,4 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
-# django_heroku.settings(locals())
+django_heroku.settings(locals())
