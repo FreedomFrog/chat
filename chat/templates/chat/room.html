@@ -20,6 +20,8 @@
     chatSocket.onmessage = function(e) {
         var data = JSON.parse(e.data);
         var message = data['message'];
+        var user = data['user'];
+        var in_data = data['data'];
         document.querySelector('#chat-log').value += (message + '\n');
     };
 
@@ -37,8 +39,12 @@
     document.querySelector('#chat-message-submit').onclick = function(e) {
         var messageInputDom = document.querySelector('#chat-message-input');
         var message = messageInputDom.value;
+        var user = 'anon';
+        var in_data = 'empty';
         chatSocket.send(JSON.stringify({
-            'message': message
+            'message': message,
+            'user': user,
+            'data': in_data,
         }));
 
         messageInputDom.value = '';
