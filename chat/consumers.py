@@ -105,12 +105,12 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
             await self.send(text_data=json_message)
             # testing
-            await self.send({
-                "type": "chat_message",
-                'message': 'chat_fetch',
-                'user': user,
-                'data': json_message
-            })
+            # await self.send({
+            #     "type": "chat_message",
+            #     'message': 'chat_fetch',
+            #     'user': user,
+            #     'data': messages
+            # })
         else:
             group = ChatRoom.objects.get(id=self.room_group_name)
             async_to_sync(Message.objects.create(chatgroup=group, content=text_data_json))
