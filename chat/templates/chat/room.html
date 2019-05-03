@@ -9,6 +9,7 @@
     <textarea id="chat-log" cols="100" rows="20"></textarea><br/>
     <input id="chat-message-input" type="text" size="100"/><br/>
     <input id="chat-message-submit" type="button" value="Send"/>
+    <input id="fetch-messages" type="button" value="fetch"/>
 </body>
 <script>
     var roomName = {{ room_name_json }};
@@ -44,13 +45,24 @@
         var message = messageInputDom.value;
         var user = 'anon';
         var in_data = 'empty';
+        var command = '';
         chatSocket.send(JSON.stringify({
             'message': message,
             'user': user,
             'data': in_data,
+            'command': command
         }));
 
         messageInputDom.value = '';
     };
+
+    document.querySelector('#fetch-messages').onclick = function(e) {
+        chatSocket.send(JSON.stringify({
+            'message': '',
+            'user': '',
+            'data': '',
+            'command': 'fetch_messages'
+        }));
+    }
 </script>
 </html>

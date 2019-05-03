@@ -1,6 +1,10 @@
 from asgiref.sync import async_to_sync
 from channels.generic.websocket import WebsocketConsumer, AsyncWebsocketConsumer
 import json
+from django.core.serializers import serialize
+from django.core.serializers.json import DjangoJSONEncoder
+from .models import Message, ChatRoom
+
 
 # class ChatConsumer(WebsocketConsumer):
 #     def connect(self):
@@ -42,6 +46,13 @@ import json
 #         self.send(text_data=json.dumps({
 #             'message':message
 #         }))
+
+class LazyEncoder(DjangoJSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, Message):
+            return str(obj)
+        return super().default(obj)
+
 class ChatConsumer(AsyncWebsocketConsumer):
     async def connect(self):
         self.room_name = self.scope['url_route']['kwargs']['room_name']
@@ -52,6 +63,9 @@ class ChatConsumer(AsyncWebsocketConsumer):
             self.room_group_name,
             self.channel_name
         )
+
+        async_to_sync(ChatRoom.objects.get_or_create(
+            id=self.room_group_name))
 
         await self.accept()
 
@@ -68,6 +82,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
         message = text_data_json['message']
         user = text_data_json['user']
         data = text_data_json['data']
+        command = text_data_json['command']
 
         # Send message to room group
         await self.channel_layer.group_send(
@@ -79,6 +94,19 @@ class ChatConsumer(AsyncWebsocketConsumer):
                 'data': data,
             }
         )
+
+        if command == 'fetch_messages':
+            group = ChatRoom.objects.get(id=self.room_group_name)
+            print(group)
+            messages = serialize('json', group.last_50_messages(), cls=LazyEncoder)
+            print(f'messages: {messages}')
+            json_message = json.dumps(messages)
+
+            await self.send(text_data=json_message)
+        else:
+            group = ChatRoom.objects.get(id=self.room_group_name)
+            async_to_sync(Message.objects.create(chatgroup=group, content=text_data_json))
+
 
     # Receive message from room group
     async def chat_message(self, event):
@@ -92,3 +120,14 @@ class ChatConsumer(AsyncWebsocketConsumer):
             'user': user,
             'data': data,
         }))
+
+    async def send_message(self, message):
+        print(message)
+        await self.send(text_data=message)
+
+    async def messages_to_json(self, message):
+        return {
+            'data': message['data'],
+            'message': message['message'],
+            'user': message['user']
+        }
