@@ -14,7 +14,7 @@ class ChatRoom(models.Model):
     id = models.TextField(primary_key=True, unique=True)
 
     def last_50_messages(self):
-        return Message.objects.filter(chatgroup=self.id).order_by('-created_at').all()[:50]
+        return Message.objects.filter(chatgroup=self.id).order_by('created_at').all()[:50]
 
 
 class Message(models.Model):

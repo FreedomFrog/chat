@@ -100,9 +100,17 @@ class ChatConsumer(AsyncWebsocketConsumer):
             print(group)
             messages = serialize('json', group.last_50_messages(), cls=LazyEncoder)
             print(f'messages: {messages}')
+
             json_message = json.dumps(messages)
 
             await self.send(text_data=json_message)
+            # testing
+            await self.send({
+                "type": "chat_message",
+                'message': 'chat_fetch',
+                'user': user,
+                'data': json_message
+            })
         else:
             group = ChatRoom.objects.get(id=self.room_group_name)
             async_to_sync(Message.objects.create(chatgroup=group, content=text_data_json))
