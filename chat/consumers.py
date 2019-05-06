@@ -97,20 +97,26 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
         if command == 'fetch_messages':
             group = ChatRoom.objects.get(id=self.room_group_name)
-            print(group)
-            messages = serialize('json', group.last_50_messages(), cls=LazyEncoder)
-            print(f'messages: {messages}')
+            # print(group)
+            # messages = serialize('json', group.last_50_messages(), cls=LazyEncoder)
+            messages = group.last_50_messages()
+            result = []
+            for message in messages:
+                result.append(message)
 
-            json_message = json.dumps(messages)
+            # print(f'messages: {messages}')
+            # print(result)
 
-            await self.send(text_data=json_message)
+            # json_message = json.dumps(result)
+
+            # await self.send(text_data=json_message)
             # testing
-            # await self.send({
-            #     "type": "chat_message",
-            #     'message': 'chat_fetch',
-            #     'user': user,
-            #     'data': messages
-            # })
+            await self.send(text_data=json.dumps({
+                "type": "chat_message",
+                'message': 'chat_fetch',
+                'user': user,
+                'data': serialize('json', result, fields=('content',))
+            }))
         else:
             group = ChatRoom.objects.get(id=self.room_group_name)
             async_to_sync(Message.objects.create(chatgroup=group, content=text_data_json))
@@ -129,13 +135,13 @@ class ChatConsumer(AsyncWebsocketConsumer):
             'data': data,
         }))
 
-    async def send_message(self, message):
-        print(message)
-        await self.send(text_data=message)
-
-    async def messages_to_json(self, message):
-        return {
-            'data': message['data'],
-            'message': message['message'],
-            'user': message['user']
-        }
+    # async def send_message(self, message):
+    #     print(message)
+    #     await self.send(text_data=message)
+    #
+    # async def messages_to_json(self, messages):
+    #     return {
+    #         'data': message['data'],
+    #         'message': message['message'],
+    #         'user': message['user']
+    #     }

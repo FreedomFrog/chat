@@ -14,7 +14,7 @@ class ChatRoom(models.Model):
     id = models.TextField(primary_key=True, unique=True)
 
     def last_50_messages(self):
-        return Message.objects.filter(chatgroup=self.id).order_by('created_at').all()[:50]
+        return Message.objects.filter(chatgroup=self.id).order_by('created_at').all().reverse()[:50:-1]
 
 
 class Message(models.Model):
@@ -28,4 +28,7 @@ class Message(models.Model):
     chatgroup = models.ForeignKey(ChatRoom, on_delete=models.CASCADE)
     content = models.TextField(validators=[validate_message_content])
     created_at = models.DateTimeField(auto_now_add=True, blank=True)
+
+    def __str__(self):
+        return self.content
 
