@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.exceptions import ValidationError
+from django.contrib.postgres.fields import JSONField
 import uuid
 
 def validate_message_content(content):
@@ -26,9 +27,16 @@ class Message(models.Model):
         unique=True
     )
     chatgroup = models.ForeignKey(ChatRoom, on_delete=models.CASCADE)
-    content = models.TextField(validators=[validate_message_content])
+    content = JSONField()
     created_at = models.DateTimeField(auto_now_add=True, blank=True)
 
     def __str__(self):
         return self.content
+
+    def reprJSON(self):
+        return dict(
+            chatgroup=self.chatgroup,
+            content=self.content,
+            created_at=self.created_at
+        )
 

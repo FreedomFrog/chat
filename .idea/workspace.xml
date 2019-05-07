@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e86b85a8-a8a9-4e3f-b75b-8fca22488976" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/chat/migrations/0002_auto_20190506_0254.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chat/consumers.py" beforeDir="false" afterPath="$PROJECT_DIR$/chat/consumers.py" afterDir="false" />
-    </list>
+    <list default="true" id="e86b85a8-a8a9-4e3f-b75b-8fca22488976" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,11 +22,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/chat/consumers.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="534">
-              <caret line="137" selection-start-line="137" selection-end-line="146" selection-end-column="11" />
+            <state relative-caret-position="636">
+              <caret line="122" column="43" lean-forward="true" selection-start-line="122" selection-start-column="43" selection-end-line="122" selection-end-column="43" />
               <folding>
                 <element signature="e#0#38#0" expanded="true" />
               </folding>
@@ -38,11 +34,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/chat/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
+            <state relative-caret-position="697">
+              <caret line="41" lean-forward="true" selection-start-line="41" selection-end-line="41" />
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
               </folding>
@@ -164,8 +160,8 @@
         <option value="$PROJECT_DIR$/django_channels/settings.py" />
         <option value="$PROJECT_DIR$/chat/apps.py" />
         <option value="$PROJECT_DIR$/chat/templates/chat/room.html" />
-        <option value="$PROJECT_DIR$/chat/consumers.py" />
         <option value="$PROJECT_DIR$/chat/models.py" />
+        <option value="$PROJECT_DIR$/chat/consumers.py" />
       </list>
     </option>
   </component>
@@ -274,12 +270,12 @@
       <option name="presentableId" value="Default" />
       <updated>1549744808697</updated>
       <workItem from="1554439368107" duration="93000" />
-      <workItem from="1556850554282" duration="14722000" />
+      <workItem from="1556850554282" duration="18746000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="14815000" />
+    <option name="totallyTimeSpent" value="18839000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="0" width="1293" height="1407" extended-state="0" />
@@ -455,22 +451,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/chat/consumers.py">
+    <entry file="file://$PROJECT_DIR$/chat/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="534">
-          <caret line="137" selection-start-line="137" selection-end-line="146" selection-end-column="11" />
+        <state relative-caret-position="697">
+          <caret line="41" lean-forward="true" selection-start-line="41" selection-end-line="41" />
           <folding>
-            <element signature="e#0#38#0" expanded="true" />
+            <element signature="e#0#28#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/chat/models.py">
+    <entry file="file://$PROJECT_DIR$/chat/consumers.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
+        <state relative-caret-position="636">
+          <caret line="122" column="43" lean-forward="true" selection-start-line="122" selection-start-column="43" selection-end-line="122" selection-end-column="43" />
           <folding>
-            <element signature="e#0#28#0" expanded="true" />
+            <element signature="e#0#38#0" expanded="true" />
           </folding>
         </state>
       </provider>

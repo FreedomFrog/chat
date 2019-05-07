@@ -53,6 +53,7 @@ class LazyEncoder(DjangoJSONEncoder):
             return str(obj)
         return super().default(obj)
 
+
 class ChatConsumer(AsyncWebsocketConsumer):
     async def connect(self):
         self.room_name = self.scope['url_route']['kwargs']['room_name']
@@ -75,6 +76,9 @@ class ChatConsumer(AsyncWebsocketConsumer):
             self.room_group_name,
             self.channel_name
         )
+
+    def get_messages(self, groupname):
+        return ChatRoom.objects.get(id=groupname).last_50_messages()
 
     # Receive message from WebSocket
     async def receive(self, text_data):
@@ -99,10 +103,11 @@ class ChatConsumer(AsyncWebsocketConsumer):
             group = ChatRoom.objects.get(id=self.room_group_name)
             # print(group)
             # messages = serialize('json', group.last_50_messages(), cls=LazyEncoder)
-            messages = group.last_50_messages()
-            result = []
-            for message in messages:
-                result.append(message)
+            list_messages = group.last_50_messages()
+            messages = [message.content for message in list_messages]
+            # result = []
+            # for message in messages:
+            #     result.append(message)
 
             # print(f'messages: {messages}')
             # print(result)
@@ -115,7 +120,8 @@ class ChatConsumer(AsyncWebsocketConsumer):
                 "type": "chat_message",
                 'message': 'chat_fetch',
                 'user': user,
-                'data': serialize('json', result, fields=('content',))
+                # 'data': serialize('json', messages, fields=('content',))
+                'data': json.dumps(messages)
             }))
         else:
             group = ChatRoom.objects.get(id=self.room_group_name)
